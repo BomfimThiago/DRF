@@ -25,7 +25,7 @@ SECRET_KEY = '&&y3ol2mwh&en8zlotd=g=%mb!im-!iz80f8_kbo2y3q8c&bfm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'people',
     'artifacts',
     'books',
+    'vehicles',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'fedora.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / "fedora/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

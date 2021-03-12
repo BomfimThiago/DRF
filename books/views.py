@@ -7,13 +7,29 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser, BasePermiss
 from .models import Book
 from .serializers import BookSerializer
 
+class IsSuperUser(BasePermission):
+    """essa é uma permissão customizada"""
+    def has_permission(self, request, view):
+        return request.user.is_superuser
+
+    def has_object_permission(self, request, view, obj):
+        return request.user.is_superuser
+
+class IsIndy(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        if not obj.restricted:
+            return True
+        return request.user.username == 'indy'
+
 # Create your views here.
 class BookViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsIndy | IsSuperUser]
 
     def get_queryset(self):
-        return Book.objects.all()
+        if self.request.user.is_staff:
+            return Book.objects.all()
+        return Book.objects.filter(restricted=False)
 
 @login_required
 def library(request):
