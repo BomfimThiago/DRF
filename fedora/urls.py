@@ -9,4 +9,5 @@ urlpatterns = [
     path('books/', include('books.urls')),
     path('artifacts/', include('artifacts.urls')),
     path('vehicles/', include('vehicles.urls')),
+    path('api/', include('api.urls'))
 ]
